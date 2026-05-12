@@ -14,6 +14,8 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <poll.h>
+#include <fcntl.h>
 
 
 #endif
