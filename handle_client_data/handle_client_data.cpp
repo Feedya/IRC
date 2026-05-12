@@ -18,9 +18,10 @@ int handle_client_data(int fd_index, std::map<int, Client> clients, std::vector<
     }
     //il etait deja la donc on va voir
     //si il nous renvoie un message ou si il est revenu
-    else
+    /*else
     {
-
-    }
+        //ici on fait les messages aux gens
+    }*/
+    return (0);
 }
 //-----------------------------------------------------------

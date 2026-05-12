@@ -5,7 +5,7 @@ C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 LOGIN_FIRST_TIME_DIR = handle_client_data/login/first_time
 
-LOGIN_DIR = handle_client_data/login
+LOGIN_DIR = handle_client_data/
 #------------------------------------------------------------------
 #FICHIER SOURCE - FICHIER SOURCE - FICHIER SOURCE - FICHIER SOURCE
 
@@ -15,7 +15,7 @@ LOGIN_FIRST_TIME_SRC = $(LOGIN_FIRST_TIME_DIR)/get_name.cpp $(LOGIN_FIRST_TIME_D
 LOGIN_SRC = $(LOGIN_DIR)/handle_client_data.cpp
 #------------------------------------------------------------------
 
-INFILES = 	main.cpp boucle_principale.cpp create_listening_socket.cpp\
+INFILES = 	main.cpp boucle_principale.cpp create_listening_socket.cpp utils.cpp\
 			$(LOGIN_SRC)\
 			$(LOGIN_FIRST_TIME_SRC)
 #------------------------------------------------------------------

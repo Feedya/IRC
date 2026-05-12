@@ -6,9 +6,9 @@
 //sinon elle renvoie 0
 int string_finished(std::string str)
 {
-    int i = 0;
+    long unsigned int i = 0;
 
-    while (i != str.size())
+    while (i < str.size())
     {
         if (str[i] == '\n')
             return (1);

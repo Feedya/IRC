@@ -1,12 +1,12 @@
-#include "../../head.hpp"
-#include "../../Client.hpp"
+#include "../../../head.hpp"
+#include "../../../Client.hpp"
 
 
 int get_password(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
 {
     Client &client = clients[fds[fd_index].fd];
     int error;
-    size_t bits;
+    ssize_t bits;
 
     char buffer[1000];
 

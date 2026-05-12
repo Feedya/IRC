@@ -1,12 +1,9 @@
-#include "../../head.hpp"
-#include "../../Client.hpp"
+#include "../../../head.hpp"
+#include "../../../Client.hpp"
 
 void    take_password_and_name(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
 {
     Client &client = clients[fds[fd_index].fd];
-    int error;
-    size_t bits;
-    char buffer[1000];
 
     //on demande le nom premierement
     //si il n y a pas de nom on va lui demander le nom

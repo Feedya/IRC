@@ -1,5 +1,5 @@
-#include "../../head.hpp"
-#include "../../Client.hpp"
+#include "../../../head.hpp"
+#include "../../../Client.hpp"
 
 
 //-----------------------------------------------------------
@@ -12,7 +12,7 @@ int get_name(int fd_index, std::map<int, Client> &clients, std::vector<struct po
 {
     Client &client = clients[fds[fd_index].fd];
     int error;
-    size_t bits;
+    ssize_t bits = 0;
 
     char buffer[1000];
 
