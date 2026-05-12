@@ -1,1 +1,1 @@
-[DOUGLAS](douglas.jpg)
+![DOUGLAS](douglas.jpg)
