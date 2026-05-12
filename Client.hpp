@@ -3,15 +3,26 @@
 
 #include "head.hpp"
 
-
-
 class Client
 {
     private:
         std::string _name;
         std::string _password;
         bool _nouveau;
-        
+
+        //je dois rajouter une string de se que le client a deja ecrit
+        //pour le password et les questions
+        //donc je vais faire 1 string pour les name et password
+        //et une autre pour les messages
+        //ou je met tout dans une seule
+        //que je devrai clean
+        //pttr c est la meilleure idee
+        std::string _message;
+
+        //si on lui a demander le nom
+        int _ask_name;
+        //si on lui demande un password
+        int _ask_password;
 
     public:
 
@@ -20,6 +31,9 @@ class Client
             this->_nouveau = true;
             this->_name = "";
             this->_password = "";
+            this->_message = "";
+            this->_ask_name = 0;
+            this->_ask_password = 0;
         }
 
         ~Client()
@@ -34,7 +48,7 @@ class Client
 
         void    put_password(std::string password)
         {
-            this->_password;
+            this->_password = password;
         }
 
         //renvoie 0 si les deux password sont bon
@@ -53,6 +67,25 @@ class Client
             this->_nouveau = false;
         }
 
+        void    put_to_string(std::string entree)
+        {
+            this->_message = this->_message + entree;
+        }
+
+        void    clean_message()
+        {
+            this->_message = "";
+        }
+
+        void    put_ask_name_to_one()
+        {
+            this->_ask_name = 1;
+        }
+
+        void    put_ask_password_to_one()
+        {
+            this->_ask_password = 1;
+        }
 //-----------------------------------------------------------------
         //GUETTER
         std::string get_name()
@@ -65,9 +98,24 @@ class Client
             return (this->_password);
         }
 
+        std::string get_message()
+        {
+            return (this->_message);
+        }
+
         bool see_if_new()
         {
             return (this->_nouveau);
+        }
+
+        int get_ask_name()
+        {
+            return (this->_ask_name);
+        }
+
+        int get_ask_password()
+        {
+            return (this->_ask_password);
         }
 //-----------------------------------------------------------------
 

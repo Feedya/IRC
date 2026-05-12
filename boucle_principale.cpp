@@ -66,6 +66,8 @@ void    boucle_principale(int fd_server)
                         fds.push_back(client_pfd);
                         std::cout << "Nouveau client arrive !!!!" << std::endl;
                     }
+                    else
+                        std::cout << "accept a bader" << std::endl;
                 }
                 //un client envoies un message
                 else

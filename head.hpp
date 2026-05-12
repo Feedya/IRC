@@ -17,10 +17,19 @@
 #include <poll.h>
 #include <fcntl.h>
 
-#include <Client.hpp>
+#include "Client.hpp"
 
 void    boucle_principale(int fd_server);
 int handle_client_data(int fd_index, std::map<int, Client> clients, std::vector<struct pollfd> fds);
 int    create_listening_socket(char *port_char);
+
+//login/first_time
+void    take_password_and_name(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds);
+int get_name(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds);
+int get_password(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds);
+
+
+//UTILS
+int string_finished(std::string str);
 
 #endif
