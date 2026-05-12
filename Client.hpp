@@ -3,16 +3,23 @@
 
 #include "head.hpp"
 
+
+
 class Client
 {
     private:
         std::string _name;
         std::string _password;
+        bool _nouveau;
+        
+
     public:
 
         Client()
         {
-
+            this->_nouveau = true;
+            this->_name = "";
+            this->_password = "";
         }
 
         ~Client()
@@ -38,6 +45,31 @@ class Client
                 return (0);
             return (-1);
         }
+
+        //cette fonciton va nous dire si c est un client
+        //qui n a pas encore de passeword ni de name
+        void    put_nouveau_to_false()
+        {
+            this->_nouveau = false;
+        }
+
+//-----------------------------------------------------------------
+        //GUETTER
+        std::string get_name()
+        {
+            return (this->_name);
+        }
+
+        std::string get_password()
+        {
+            return (this->_password);
+        }
+
+        bool see_if_new()
+        {
+            return (this->_nouveau);
+        }
+//-----------------------------------------------------------------
 
 };
 

@@ -64,7 +64,7 @@ void    boucle_principale(int fd_server)
                         client_pfd.events = POLLIN;
                         //on met le nouveau fd dans notre vecteur
                         fds.push_back(client_pfd);
-                        std::cout << "Nouveau convive arrivé !" << std::endl;
+                        std::cout << "Nouveau client arrive !!!!" << std::endl;
                     }
                 }
                 //un client envoies un message
@@ -72,7 +72,7 @@ void    boucle_principale(int fd_server)
                 {
                     // fonction qui va reservoir se que le client nous envoie
                     // POLLIN (IN)
-                    handle_client_data(fds); 
+                    handle_client_data(i, clients, fds); 
                 }
             }
         }
