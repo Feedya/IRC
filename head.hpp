@@ -17,6 +17,8 @@
 #include <poll.h>
 #include <fcntl.h>
 
+#include <Client.hpp>
+
 void    boucle_principale(int fd_server);
 int handle_client_data(std::vector<struct pollfd> fds);
 int    create_listening_socket(char *port_char);

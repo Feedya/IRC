@@ -9,6 +9,10 @@ void    boucle_principale(int fd_server)
 {
     //on creer nos structure pour poll
     std::vector<struct pollfd> fds;
+
+    //une map ou chaque client sera lies par son fd
+    std::map<int, Client> clients;
+ 
     //la meme structure pour le serveur
     struct pollfd server_pfd;
     
@@ -46,6 +50,8 @@ void    boucle_principale(int fd_server)
                     int new_client = accept(fd_server, NULL, NULL);
                     if (new_client != -1)
                     {
+                        Client nouveau_client;
+                        clients[new_client] = nouveau_client;
                         // INDISPENSABLE : rendre le nouveau client non-bloquant
                         //F_SETFL on veut modifier le fd
                         //O_NONBLOCK le fd sera non bloquant en mode il va pas bloquer le programme
