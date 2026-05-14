@@ -17,6 +17,8 @@
 #include <poll.h>
 #include <fcntl.h>
 
+
+#include "Message.hpp"
 #include "Client.hpp"
 
 void    boucle_principale(int fd_server);

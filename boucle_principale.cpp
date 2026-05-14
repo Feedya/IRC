@@ -81,3 +81,20 @@ void    boucle_principale(int fd_server)
     }
 }
 //-------------------------------------------------------------------------------------
+
+
+//A RAJOUTER 
+
+
+//il faut que les clients qui se deconnectent je close son fd 
+//mais je ne dois pas supprimer ces donnes depuis le vecteur
+//comme ca quand il se reconnecte je peux juste lui redonner les info
+//qu il avait deja dans le vecteur
+
+//et donc quand il se reconnecte faudra lui donner un nouveau fd
+
+//il faut que je rajoute dans la classe client
+//un bool qui dit si il est connecter ou non
+//on peut meme mettre un int comme ca le client peut avoir
+//plus d etats differents que seulement 2
+

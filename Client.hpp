@@ -1,7 +1,7 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 
-#include "head.hpp"
+#include "Message.hpp"
 
 class Client
 {
@@ -17,12 +17,19 @@ class Client
         //ou je met tout dans une seule
         //que je devrai clean
         //pttr c est la meilleure idee
-        std::string _message;
+        //std::string _message;
+
+        Message _message;
 
         //si on lui a demander le nom
         int _ask_name;
         //si on lui demande un password
         int _ask_password;
+
+        //ce int sera la pour dire l etats du client
+        //connecter = 0
+        //deco = 1
+        int _etats;
 
     public:
 
@@ -31,9 +38,10 @@ class Client
             this->_nouveau = true;
             this->_name = "";
             this->_password = "";
-            this->_message = "";
+            this->_message.set_message("");
             this->_ask_name = 0;
             this->_ask_password = 0;
+            this->_etats = 0;
         }
 
         ~Client()
@@ -69,12 +77,12 @@ class Client
 
         void    put_to_string(std::string entree)
         {
-            this->_message = this->_message + entree;
+            this->_message.add_to_message(entree);
         }
 
         void    clean_message()
         {
-            this->_message = "";
+            this->_message.set_message("");
         }
 
         void    put_ask_name_to_one()
@@ -86,6 +94,13 @@ class Client
         {
             this->_ask_password = 1;
         }
+
+        //avec cette fonction on va mettre les etats differents
+        void    set_etats(int nombre)
+        {
+            this->_etats = nombre;
+        }
+
 //-----------------------------------------------------------------
         //GUETTER
         std::string get_name()
@@ -100,7 +115,7 @@ class Client
 
         std::string get_message()
         {
-            return (this->_message);
+            return (this->_message.get_message());
         }
 
         bool see_if_new()
@@ -117,6 +132,14 @@ class Client
         {
             return (this->_ask_password);
         }
+
+
+        int get_etats()
+        {
+            return (this->_etats);
+        }
+
+
 //-----------------------------------------------------------------
 
 };
