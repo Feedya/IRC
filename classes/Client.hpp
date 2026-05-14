@@ -1,7 +1,7 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 
-#include "Message.hpp"
+#include "../head.hpp"
 
 class Client
 {
@@ -48,6 +48,36 @@ class Client
         {
 
         }
+         
+        void    put_to_string(std::string entree)
+        {
+            this->_message.add_to_message(entree);
+        }
+
+        //cette fonction va lire depuis le fd et rajouter dans le messsage du client
+        //0 si tout vas bien
+        //1 si le client est deco
+        //-1 si erreur de recv
+        int read_message(int fd)
+        {
+            char buffer[1000];
+            int error;
+            std::string result;
+
+            error = recv(fd, buffer, sizeof(buffer) - 1, 0);
+            //recv a bader
+            if (error < 0)
+            {
+                return (1);
+            }
+            //le gars ses deco
+            if (error == 0)
+            {
+                return (-1);
+            }
+            this->put_to_string(buffer);
+            return (0);
+        }
 
         void    put_name(std::string name)
         {
@@ -73,11 +103,6 @@ class Client
         void    put_nouveau_to_false()
         {
             this->_nouveau = false;
-        }
-
-        void    put_to_string(std::string entree)
-        {
-            this->_message.add_to_message(entree);
         }
 
         void    clean_message()

@@ -1,11 +1,10 @@
 #include "../head.hpp"
-#include "../Client.hpp"
 
 
-//ici dans cette fonction je dois verifier si le client ses deco (recv va renvoyer 0)
-int handle_message(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
+std::string *read_message_from_client(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
 {
     char buffer[1000];
+    std::string str;
     int error = 0;
     Client &client = clients[fds[fd_index].fd];
 
@@ -19,7 +18,7 @@ int handle_message(int fd_index, std::map<int, Client> &clients, std::vector<str
     {
         std::cout << "le gars ses deconnecter faut mettre au propre apres" << std::endl;
         std::cout << "dans get_password" << std::endl;
-        return (1);
+        return ();
     }
     client.put_to_string(buffer);
     if (string_finished(client.get_message()) == 1)
@@ -28,7 +27,17 @@ int handle_message(int fd_index, std::map<int, Client> &clients, std::vector<str
         client.clean_message();
         return (0);
     }
-    return (0);
+    str = buffer.str();
+    return (&buffer);
+}
+
+
+//ici dans cette fonction je dois verifier si le client ses deco (recv va renvoyer 0)
+int handle_message(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
+{
+    char &message = read_message_from_client(fd_index, clients, fds);
+
+
 }
 
 

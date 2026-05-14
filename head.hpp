@@ -18,8 +18,8 @@
 #include <fcntl.h>
 
 
-#include "Message.hpp"
-#include "Client.hpp"
+#include "classes/Message.hpp"
+#include "classes/Client.hpp"
 
 void    boucle_principale(int fd_server);
 int handle_client_data(int fd_index, std::map<int, Client> clients, std::vector<struct pollfd> fds);

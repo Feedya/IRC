@@ -1,5 +1,4 @@
 #include "head.hpp"
-#include "Client.hpp"
 
 
 //renvoie 1 si la string est finis

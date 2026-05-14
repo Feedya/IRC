@@ -2,7 +2,7 @@
 #define MESSAGE_HPP
 
 
-#include "head.hpp"
+#include "../head.hpp"
 
 class Message
 {

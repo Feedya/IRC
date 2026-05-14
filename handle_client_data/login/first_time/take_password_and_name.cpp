@@ -1,5 +1,4 @@
 #include "../../../head.hpp"
-#include "../../../Client.hpp"
 
 void    take_password_and_name(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
 {
