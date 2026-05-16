@@ -8,6 +8,9 @@ class Client
     private:
         std::string _name;
         std::string _password;
+        
+        //faut regarder si on peut enlever ca
+        //je crois je ne l utilise pas
         bool _nouveau;
 
         //je dois rajouter une string de se que le client a deja ecrit
@@ -142,6 +145,11 @@ class Client
         {
             return (this->_message.get_message());
         }
+        
+        Message get_class_message()
+        {
+            return (this->_message);
+        }
 
         bool see_if_new()
         {
@@ -163,7 +171,6 @@ class Client
         {
             return (this->_etats);
         }
-
 
 //-----------------------------------------------------------------
 

@@ -23,6 +23,8 @@ void    boucle_principale(int fd_server)
 
     listen(fd_server, 10);
 
+    int cas = 0;
+
     while (true)
     {
         //-1 : attente infinis
@@ -65,6 +67,7 @@ void    boucle_principale(int fd_server)
                         //on met le nouveau fd dans notre vecteur
                         fds.push_back(client_pfd);
                         std::cout << "Nouveau client arrive !!!!" << std::endl;
+                        break;
                     }
                     else
                         std::cout << "accept a bader" << std::endl;
@@ -74,7 +77,10 @@ void    boucle_principale(int fd_server)
                 {
                     // fonction qui va reservoir se que le client nous envoie
                     // POLLIN (IN)
-                    handle_client_data(i, clients, fds); 
+                    cas = handle_client_data(i, clients, fds); 
+                    //qqn ses deco faut recommencer a 0
+                    if (cas == 1)
+                        break;
                 }
             }
         }

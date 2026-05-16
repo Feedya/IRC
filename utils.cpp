@@ -15,3 +15,15 @@ int string_finished(std::string str)
     }
     return (0);
 }
+
+
+//elle va effacer un fd a l index dans fds
+void    remove_fd_from_fds(int index, std::vector<struct pollfd> &fds)
+{
+    std::vector<struct pollfd>::iterator it;
+
+    if (index >= 0 && index < (int)fds.size())
+    {
+        fds.erase(fds.begin() + index);
+    }
+}

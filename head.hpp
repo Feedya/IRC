@@ -20,6 +20,7 @@
 
 #include "classes/Message.hpp"
 #include "classes/Client.hpp"
+#include "classes/OldClients.hpp"
 
 void    boucle_principale(int fd_server);
 int handle_client_data(int fd_index, std::map<int, Client> clients, std::vector<struct pollfd> fds);
@@ -30,8 +31,20 @@ void    take_password_and_name(int fd_index, std::map<int, Client> &clients, std
 int get_name(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds);
 int get_password(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds);
 
+//HANDLE CLIENT DATA
+int handle_message(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds);
+
+
+
+
 
 //UTILS
 int string_finished(std::string str);
+
+//utils fds
+void    remove_fd_from_fds(int index, std::vector<struct pollfd> &fds);
+
+
+
 
 #endif
