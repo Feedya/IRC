@@ -7,9 +7,9 @@
 //je dois faire 1 fois 1 send pour le client
 //Et une autre fois un recv tant que je n ai pas eu de \n
 //apres je remplis
-int get_name(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
+int get_name(int fd_index, ClientDataBase client_database, std::vector<struct pollfd> &fds)
 {
-    Client &client = clients[fds[fd_index].fd];
+    Client &client = client_database.get_co_client(fds[fd_index].fd);
     int error;
     ssize_t bits = 0;
 
@@ -39,6 +39,7 @@ int get_name(int fd_index, std::map<int, Client> &clients, std::vector<struct po
         }
         if (error == 0)
         {
+            client_database.move_co_client_to_deco_client(fds[fd_index].fd);
             std::cout << "le gars ses deconnecter faut mettre au propre apres" << std::endl;
             std::cout << "dans take_name" << std::endl;
             return (1);

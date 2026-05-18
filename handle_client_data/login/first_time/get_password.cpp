@@ -1,9 +1,9 @@
 #include "../../../head.hpp"
 
 
-int get_password(int fd_index, std::map<int, Client> &clients, std::vector<struct pollfd> &fds)
+int get_password(int fd_index, ClientDataBase client_database, std::vector<struct pollfd> &fds)
 {
-    Client &client = clients[fds[fd_index].fd];
+    Client &client = client_database.get_co_client(fds[fd_index].fd);
     int error;
     ssize_t bits;
 
@@ -33,6 +33,7 @@ int get_password(int fd_index, std::map<int, Client> &clients, std::vector<struc
         }
         if (error == 0)
         {
+            client_database.move_co_client_to_deco_client(fds[fd_index].fd);
             std::cout << "le gars ses deconnecter faut mettre au propre apres" << std::endl;
             std::cout << "dans get_password" << std::endl;
             return (1);

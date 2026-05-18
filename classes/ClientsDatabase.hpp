@@ -43,7 +43,7 @@ class ClientDataBase
             std::string name = client.get_name();
             std::string password = client.get_password();
             client.put_nouveau_to_false();
-            this->_deco_clients[{name, password}] = OldClient(client);
+            this->_deco_clients[std::make_pair(name, password)] = OldClient(client);
         }
 
 
@@ -53,8 +53,7 @@ class ClientDataBase
 
         Client  &get_co_client(int fd)
         {
-            Client client = this->_co_clients[fd];
-            return (client);
+            return (this->_co_clients[fd]);
         }
 
         std::map<int, Client> get_co_client_database()
@@ -62,7 +61,7 @@ class ClientDataBase
             return (this->_co_clients);
         }
 
-        std::map<std::pair<std::string, std::string>, OldClient> get_deco_client_database()
+        std::map<std::pair<std::string, std::string>, OldClient> &get_deco_client_database()
         {
             return (this->_deco_clients);
         }

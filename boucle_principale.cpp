@@ -87,7 +87,7 @@ void    boucle_principale(int fd_server)
                 {
                     // fonction qui va reservoir se que le client nous envoie
                     // POLLIN (IN)
-                    cas = handle_client_data(i, clients, fds); 
+                    cas = handle_client_data(i, client_data_base, fds); 
                     //qqn ses deco faut recommencer a 0
                     if (cas == 1)
                         break;

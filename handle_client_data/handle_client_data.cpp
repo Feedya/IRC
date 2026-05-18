@@ -5,9 +5,9 @@
 //si ils envoient un message 
 //ou si ils se connectent pour la premiere fois
 //on va prendre leur login et password
-int handle_client_data(int fd_index, std::map<int, Client> clients, std::vector<struct pollfd> fds)
+int handle_client_data(int fd_index, ClientDataBase client_database, std::vector<struct pollfd> fds)
 {
-    Client &client = clients[fds[fd_index].fd];
+    Client &client = client_database.get_co_client(fds[fd_index].fd);
     int cas = 0;
 
 
@@ -15,13 +15,13 @@ int handle_client_data(int fd_index, std::map<int, Client> clients, std::vector<
     //on va lui demander le nom et le password
     if (client.see_if_new() == true)
     {
-        take_password_and_name(fd_index, clients, fds);
+        take_password_and_name(fd_index, client_database, fds);
     }
     //il etait deja la donc on va voir
     //si il nous renvoie un message ou si il est revenu
     else
     {
-        cas = handle_message(fd_index, clients, fds);
+        cas = handle_message(fd_index, client_database, fds);
         //cas si qqn ses deco
         if (cas == 1)
             return (1);

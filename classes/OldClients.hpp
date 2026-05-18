@@ -19,6 +19,11 @@ class OldClient
 
     public:
 
+        OldClient()
+        {
+            
+        }
+
         OldClient(Client &client)
         {
             this->_name = client.get_name();
