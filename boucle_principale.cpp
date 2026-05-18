@@ -7,6 +7,8 @@
 //
 void    boucle_principale(int fd_server)
 {
+    ClientDataBase client_data_base;
+
     //on creer nos structure pour poll
     std::vector<struct pollfd> fds;
 
@@ -53,7 +55,15 @@ void    boucle_principale(int fd_server)
                     if (new_client != -1)
                     {
                         Client nouveau_client;
+                        //on rajoute dans notre database
+                        client_data_base.add_co_client(new_client, nouveau_client);
+                        
+                        //-------------------------------------------------------
+                        //ca faut enlever apres je pense
+                        //parceque au final on aura tout dans clients database
                         clients[new_client] = nouveau_client;
+                        //-------------------------------------------------------
+
                         // INDISPENSABLE : rendre le nouveau client non-bloquant
                         //F_SETFL on veut modifier le fd
                         //O_NONBLOCK le fd sera non bloquant en mode il va pas bloquer le programme
