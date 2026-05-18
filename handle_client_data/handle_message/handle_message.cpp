@@ -18,6 +18,7 @@ int read_message_from_client(int fd_index, std::map<int, Client> &clients, std::
     //client ses deco
     else if (error == 0)
     {
+        //copy_client_to_old_client(clients)
         close(fd);
         remove_fd_from_fds(fd_index, fds);
         return (1);

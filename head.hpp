@@ -17,6 +17,8 @@
 #include <poll.h>
 #include <fcntl.h>
 
+class Client;
+class OldClient;
 
 #include "classes/Message.hpp"
 #include "classes/Client.hpp"
