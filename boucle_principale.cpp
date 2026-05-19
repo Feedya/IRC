@@ -1,5 +1,38 @@
 #include "head.hpp"
 
+//probleme avec cette fonction
+//le probleme c est que deco client est une map ou on a besoin de password et name
+//mais on ne sait pas d ou est ce qu il faut qu on les sorts
+//donc on a pas accer a notre database
+/*
+void    add_clients_to_all_clients(ClientDataBase &client_data_base,    std::vector<struct pollfd> fds)
+{
+    std::map<std::string, AllClient> &all_client = client_data_base.get_all_clients();
+    std::map<std::string, AllClient>::iterator it;
+
+    std::map<std::pair<std::string, std::string>, OldClient> &deco_client = client_data_base.get_deco_client_database();
+    //on verifie si on a tout les clients de clients co
+    //si il y a un nouveau on l ajoute
+    for (size_t i = 0; i < fds.size(); ++i)
+    {
+        Client co_client = client_data_base.get_co_client(fds[i].fd);
+        std::string name = co_client.get_name();
+        it = all_client.find(name);
+        //elle n existe pas
+        //on doit ajouter
+        if (it == all_client.end())
+        {
+            std::string name = co_client.get_name();
+            std::string password = co_client.get_password();
+            std::string message = co_client.get_message();
+            AllClient nouveau_client(name, password);
+            nouveau_client.add_message(message);
+            all_client[name] = nouveau_client;
+        }
+    }
+    //on doit faire la meme chose mais pour les deco
+}*/
+
 //-------------------------------------------------------------------------------------
 //POLLINT
 //
@@ -7,6 +40,7 @@
 //
 void    boucle_principale(int fd_server)
 {
+    //tout les database sur les clients seront a l interieur
     ClientDataBase client_data_base;
 
     //on creer nos structure pour poll
@@ -39,6 +73,11 @@ void    boucle_principale(int fd_server)
             break;
         }
 
+        //on va rajouter chaque client dans la database
+        //add_clients_to_all_clients(client_data_base, fds);
+        
+        
+        
         //on va regarder le quelle a fais qqc
         for (size_t i = 0; i < fds.size(); ++i)
         {

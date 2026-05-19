@@ -21,8 +21,13 @@ class Client;
 class OldClient;
 
 #include "classes/Message.hpp"
+
 #include "classes/Client.hpp"
+
 #include "classes/OldClients.hpp"
+
+#include "classes/AllClients.hpp"
+
 #include "classes/ClientsDatabase.hpp"
 
 void    boucle_principale(int fd_server);
@@ -36,9 +41,6 @@ int get_password(int fd_index, ClientDataBase client_database, std::vector<struc
 
 //HANDLE CLIENT DATA
 int handle_message(int fd_index, ClientDataBase client_database, std::vector<struct pollfd> &fds);
-
-
-
 
 
 //UTILS
