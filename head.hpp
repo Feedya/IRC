@@ -49,7 +49,8 @@ int string_finished(std::string str);
 //utils fds
 void    remove_fd_from_fds(int index, std::vector<struct pollfd> &fds);
 
-
+//HANFLE CLIENT DATABASE
+int fill_client_data_in_database(ClientDataBase &data_base, int fd);
 
 
 #endif

@@ -8,6 +8,8 @@ LOGIN_FIRST_TIME_DIR = handle_client_data/login/first_time
 LOGIN_DIR = handle_client_data/
 
 HANDLE_MESSAGE_DIR = handle_client_data/handle_message
+
+HANDLE_CLIENT_DATABASE_DIR = handle_client_data/handle_client_database
 #------------------------------------------------------------------
 #FICHIER SOURCE - FICHIER SOURCE - FICHIER SOURCE - FICHIER SOURCE
 
@@ -17,12 +19,15 @@ LOGIN_FIRST_TIME_SRC = $(LOGIN_FIRST_TIME_DIR)/get_name.cpp $(LOGIN_FIRST_TIME_D
 LOGIN_SRC = $(LOGIN_DIR)/handle_client_data.cpp
 
 HANDLE_MESSAGE_SRC = $(HANDLE_MESSAGE_DIR)/handle_message.cpp
+
+HANDLE_CLIENT_DATABASE_SRC = $(HANDLE_CLIENT_DATABASE_DIR)/fill_client_data_in_database.cpp
 #------------------------------------------------------------------
 
 INFILES = 	main.cpp boucle_principale.cpp create_listening_socket.cpp utils.cpp\
 			$(LOGIN_SRC)\
 			$(LOGIN_FIRST_TIME_SRC)\
-			$(HANDLE_MESSAGE_SRC)
+			$(HANDLE_MESSAGE_SRC)\
+			$(HANDLE_CLIENT_DATABASE_SRC)
 #------------------------------------------------------------------
 
 OBJFILES = $(INFILES:.cpp=.o)
