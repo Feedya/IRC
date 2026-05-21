@@ -1,7 +1,12 @@
 #include "../../../head.hpp"
 
 
-int get_password(int fd_index, ClientDataBase client_database, std::vector<struct pollfd> &fds)
+//
+//RENVOIE -1 EN CAS D ERREUR
+//RENVOIE 1 EN CAS DE DECO
+//RENVOIE 0 SI C EST BON
+//
+int get_password(int fd_index, ClientDataBase &client_database, std::vector<struct pollfd> &fds)
 {
     Client &client = client_database.get_co_client(fds[fd_index].fd);
     int error;
@@ -29,7 +34,7 @@ int get_password(int fd_index, ClientDataBase client_database, std::vector<struc
         {
             std::cout << "recv abader dans get_password" << std::endl;
             //FAUT CLOSE ICI LES TRUQUES POUR PAS QUE CA BADE
-            return (1);
+            return (-1);
         }
         if (error == 0)
         {
@@ -41,6 +46,7 @@ int get_password(int fd_index, ClientDataBase client_database, std::vector<struc
         client.put_to_string(buffer);
         if (string_finished(client.get_message()) == 1)
         {
+            client.put_nouveau_to_false();
             client.put_password(client.get_message());
             client.clean_message();
             return (0);

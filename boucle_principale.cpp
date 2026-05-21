@@ -76,8 +76,6 @@ void    boucle_principale(int fd_server)
         //on va rajouter chaque client dans la database
         //add_clients_to_all_clients(client_data_base, fds);
         
-        
-        
         //on va regarder le quelle a fais qqc
         for (size_t i = 0; i < fds.size(); ++i)
         {
@@ -102,7 +100,7 @@ void    boucle_principale(int fd_server)
                         //parceque au final on aura tout dans clients database
                         clients[new_client] = nouveau_client;
                         //-------------------------------------------------------
-
+                        
                         // INDISPENSABLE : rendre le nouveau client non-bloquant
                         //F_SETFL on veut modifier le fd
                         //O_NONBLOCK le fd sera non bloquant en mode il va pas bloquer le programme

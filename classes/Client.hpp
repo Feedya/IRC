@@ -71,12 +71,12 @@ class Client
             //recv a bader
             if (error < 0)
             {
-                return (1);
+                return (-1);
             }
             //le gars ses deco
             if (error == 0)
             {
-                return (-1);
+                return (1);
             }
             this->put_to_string(buffer);
             return (0);

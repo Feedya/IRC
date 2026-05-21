@@ -9,9 +9,11 @@
 class ClientDataBase
 {
     private:
+
         //c est tout les clients qui sont connecter
         //la cle et leur fd
         std::map<int, Client> _co_clients;
+
         //tout les clients deconnecter
         //leur cle sont le name et le password
         std::map<std::pair<std::string, std::string>, OldClient> _deco_clients;
@@ -21,13 +23,11 @@ class ClientDataBase
         //le std::string est le name du client
         std::map<std::string, AllClient> _all_clients;
 
-
-
     public:
         ClientDataBase()
         {
 
-        }       
+        }     
 
         void    add_all_client(std::string name, std::string password)
         {

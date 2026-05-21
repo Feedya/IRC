@@ -7,7 +7,11 @@
 //je dois faire 1 fois 1 send pour le client
 //Et une autre fois un recv tant que je n ai pas eu de \n
 //apres je remplis
-int get_name(int fd_index, ClientDataBase client_database, std::vector<struct pollfd> &fds)
+//
+//RENVOIE -1 EN CAS D ERREUR
+//RENVOIE 1 EN CAS DE DECO
+//RENVOIE 0 SI C EST BON
+int get_name(int fd_index, ClientDataBase &client_database, std::vector<struct pollfd> &fds)
 {
     Client &client = client_database.get_co_client(fds[fd_index].fd);
     int error;
@@ -35,7 +39,7 @@ int get_name(int fd_index, ClientDataBase client_database, std::vector<struct po
         {
             std::cout << "recv abader dans get_name" << std::endl;
             //FAUT CLOSE ICI LES TRUQUES POUR PAS QUE CA BADE
-            return (1);
+            return (-1);
         }
         if (error == 0)
         {

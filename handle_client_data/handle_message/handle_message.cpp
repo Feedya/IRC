@@ -10,15 +10,16 @@ int read_message_from_client(int fd_index, ClientDataBase client_database, std::
 
     error = client.read_message(fd);
     //erreur de recv
-    if (error < 0)
+    if (error == -1)
     {  
         close(fd);
         std::cout << "ERREUR DE RECV FAUT FAIRE BIEN APRES" << std::endl;
         return (-1);
     }
     //client ses deco
-    else if (error == 0)
+    else if (error == 1)
     {
+        printf("else if\n");
         client_database.move_co_client_to_deco_client(fd);
         close(fd);
         remove_fd_from_fds(fd_index, fds);
