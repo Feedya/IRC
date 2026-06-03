@@ -30,8 +30,14 @@ class Client
         int _ask_password;
 
         //ce int sera la pour dire l etats du client
-        //connecter = 0
-        //deco = 1
+        //0 traitement de nom
+        //1 choix si le nom est deja pris
+        
+        //2 nouveau mot de passe
+        //3 ancien mdp si relogin
+        
+        //4 discussion
+
         int _etats;
 
     public:
@@ -41,7 +47,7 @@ class Client
             this->_nouveau = true;
             this->_name = "";
             this->_password = "";
-            this->_message.set_message("");
+            this->_message.add_to_message("");
             this->_ask_name = 0;
             this->_ask_password = 0;
             this->_etats = 0;
@@ -171,6 +177,7 @@ class Client
         {
             return (this->_etats);
         }
+
 
 //-----------------------------------------------------------------
 

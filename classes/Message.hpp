@@ -23,6 +23,7 @@ class Message
   
         void    add_to_message(std::string message)
         {
+
             this->_message = this->_message + message;
         }
   
