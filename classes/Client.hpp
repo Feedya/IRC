@@ -58,7 +58,7 @@ class Client
 
         }
          
-        void    put_to_string(std::string entree)
+        void    add_to_message(std::string entree)
         {
             this->_message.add_to_message(entree);
         }
@@ -84,7 +84,7 @@ class Client
             {
                 return (1);
             }
-            this->put_to_string(buffer);
+            this->add_to_message(buffer);
             return (0);
         }
 

@@ -2,6 +2,7 @@
 
 void    ft_irc(char *port, char *password)
 {
+    signal(SIGPIPE, SIG_IGN);
     int majordome = create_listening_socket(port);
     boucle_principale(majordome);
     (void)password;

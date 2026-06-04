@@ -2,7 +2,8 @@
 
 int send_message(int fd, const char *message)
 {
-    if (send(fd, message, strlen(message), 0) < 0) {
+    if (send(fd, message, strlen(message), 0) < 0)
+    {
         std::cout << "Le messager a trébuché en chemin." << std::endl;
         return 1;
     }
@@ -10,6 +11,7 @@ int send_message(int fd, const char *message)
 }
 
 
+//etat 0
 void traitement_etat_nom(int fd, Client *client, ClientDataBase &db, std::string msg)
 {
     //si vide
@@ -32,7 +34,6 @@ void traitement_etat_nom(int fd, Client *client, ClientDataBase &db, std::string
         {
             client->put_name(msg);
             send_message(fd, "Ce nom est deja pris. relogin (tapez 1) ou creer nouveau (tapez 2) ?\n");
-            client->set_etats(1);
         }
     }
     //si le name est vide tout est bon
@@ -44,6 +45,7 @@ void traitement_etat_nom(int fd, Client *client, ClientDataBase &db, std::string
     }
 }
 
+//etat 1
 void traitement_etat_choix(int fd, Client *client, std::string msg)
 {
     //si le gars veut relogin
@@ -65,6 +67,7 @@ void traitement_etat_choix(int fd, Client *client, std::string msg)
     }
 }
 
+//etat 2
 void traitement_etat_nouveau_mdp(int fd, Client *client, ClientDataBase &db, std::string msg)
 {
     if (msg.empty())
@@ -78,9 +81,10 @@ void traitement_etat_nouveau_mdp(int fd, Client *client, ClientDataBase &db, std
     // on le met dans les clients co
     client = db.get_co_client(fd); 
     client->set_etats(4);
-    send_message(fd, "Vos vœux sont exaucés. Vous voici des nôtres !\n");
+    send_message(fd, "vous etes dedans\n");
 }
 
+//etat 3
 void traitement_etat_ancien_mdp(int fd, Client *client, ClientDataBase &db, std::string msg)
 {
     if (db.check_password(client->get_name(), msg) == 1)
@@ -98,6 +102,7 @@ void traitement_etat_ancien_mdp(int fd, Client *client, ClientDataBase &db, std:
     }
 }
 
+//etat 4
 void traitement_etat_discussion(int fd, Client *client, std::string msg)
 {
     std::string reponse = "[" + client->get_name() + "] déclame : " + msg + "\n";
@@ -112,9 +117,10 @@ int handle_client_data(int fd, ClientDataBase &db)
         return (0);
 
     char buffer[1000];
+    //on met tout les octets a 0 si jamais
     memset(buffer, 0, sizeof(buffer));
+    //on prend se que le client a ecrit
     int octets = recv(fd, buffer, sizeof(buffer) - 1, 0);
-
     if (octets <= 0)
     {
         std::cout << "client ses deco" << std::endl;
@@ -123,28 +129,39 @@ int handle_client_data(int fd, ClientDataBase &db)
         return (1);
     }
 
-    client->put_to_string(buffer);
+    client->add_to_message(buffer);
     
-    // Si la missive est arrivée à son terme
+    // Si le message est finis
     if (string_finished(client->get_message()) == 1)
     {
         std::string msg = client->get_message();
-        if (!msg.empty())
+        //si elle n est pas vide
+        if (msg.empty() == false)
         {
+            //on va enlever les characetre cheloux du mesasge a la fin
             msg.erase(msg.find_last_not_of(" \n\r\t") + 1);
         }
+        //on clean le message parceque on en a plus besoin
         client->clean_message();
 
+        //on prend les etats du client
+        //0 c est son nom
+        
         int etat = client->get_etats();
 
+        //on traute le name
         if (etat == 0)
             traitement_etat_nom(fd, client, db, msg);
+        //on traite les choix si name est deja pris    
         else if (etat == 1)
             traitement_etat_choix(fd, client, msg);
+        //mot de passe
         else if (etat == 2)
             traitement_etat_nouveau_mdp(fd, client, db, msg);
+        //mot de passe pour relogin    
         else if (etat == 3)
             traitement_etat_ancien_mdp(fd, client, db, msg);
+        //message    
         else if (etat == 4)
             traitement_etat_discussion(fd, client, msg);
     }

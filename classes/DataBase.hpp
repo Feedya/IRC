@@ -37,6 +37,9 @@ class ClientDataBase
             return 0;
         }
 
+        //cette fonction va creer un client
+        //dans les pending et renvoyer un pointeur dessus 
+        //elle va aussi rajouter se client dans les pointeurs des clients connecter
         Client* add_pending_client(int fd)
         {
             Client new_client;

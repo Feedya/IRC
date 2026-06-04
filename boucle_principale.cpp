@@ -85,7 +85,11 @@ void    boucle_principale(int fd_server)
                     cas = handle_client_data(fds[i].fd, client_data_base);
                     //qqn ses deco faut recommencer a 0
                     if (cas == 1)
+                    {
+                        //si le client se deco on doit supprimer son fd 
+                        fds.erase(fds.begin() + i);
                         break;
+                    }
                 }
             }
         }

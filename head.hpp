@@ -17,6 +17,7 @@
 #include <poll.h>
 #include <fcntl.h>
 #include <cstring>
+#include <signal.h>
 
 class Client;
 class OldClient;
