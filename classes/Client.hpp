@@ -51,141 +51,71 @@ class Client
 
     public:
 
-        Client()
-        {
-            this->_nouveau = true;
-            this->_name = "";
-            this->_password = "";
-            this->_message.add_to_message("");
-            this->_ask_name = 0;
-            this->_ask_password = 0;
-            this->_etats = ETAT_NOM;
-        }
+        Client();
 
-        ~Client()
-        {
 
-        }
+        ~Client();
+
          
-        void    add_to_message(std::string entree)
-        {
-            this->_message.add_to_message(entree);
-        }
+        void    add_to_message(std::string entree);
 
         //cette fonction va lire depuis le fd et rajouter dans le messsage du client
         //0 si tout vas bien
         //1 si le client est deco
         //-1 si erreur de recv
-        int read_message(int fd)
-        {
-            char buffer[1000];
-            int error;
-            std::string result;
+        int read_message(int fd);
 
-            error = recv(fd, buffer, sizeof(buffer) - 1, 0);
-            //recv a bader
-            if (error < 0)
-            {
-                return (-1);
-            }
-            //le gars ses deco
-            if (error == 0)
-            {
-                return (1);
-            }
-            this->add_to_message(buffer);
-            return (0);
-        }
 
-        void    put_name(std::string name)
-        {
-            this->_name = name;
-        }
+        void    put_name(std::string name);
 
-        void    put_password(std::string password)
-        {
-            this->_password = password;
-        }
+
+        void    put_password(std::string password);
+
 
         //renvoie 0 si les deux password sont bon
         //sinon renvoie -1 si c est pas bon
-        int check_password(std::string password)
-        {
-            if (this->_password == password)
-                return (0);
-            return (-1);
-        }
+        int check_password(std::string password);
+
 
         //cette fonciton va nous dire si c est un client
         //qui n a pas encore de passeword ni de name
-        void    put_nouveau_to_false()
-        {
-            this->_nouveau = false;
-        }
+        void    put_nouveau_to_false();
 
-        void    clean_message()
-        {
-            this->_message.set_message("");
-        }
 
-        void    put_ask_name_to_one()
-        {
-            this->_ask_name = 1;
-        }
+        void    clean_message();
 
-        void    put_ask_password_to_one()
-        {
-            this->_ask_password = 1;
-        }
+        void    put_ask_name_to_one();
+
+
+        void    put_ask_password_to_one();
+
 
         //avec cette fonction on va mettre les etats differents
-        void    set_etats(int nombre)
-        {
-            this->_etats = (EtatsClients)nombre;
-        }
+        void    set_etats(int nombre);
 
 //-----------------------------------------------------------------
         //GUETTER
-        std::string get_name()
-        {
-            return (this->_name);
-        }
+        std::string get_name();
 
-        std::string get_password()
-        {
-            return (this->_password);
-        }
 
-        std::string get_message()
-        {
-            return (this->_message.get_message());
-        }
+        std::string get_password();
+
+
+        std::string get_message();
+
         
-        Message get_class_message()
-        {
-            return (this->_message);
-        }
-
-        bool see_if_new()
-        {
-            return (this->_nouveau);
-        }
-
-        int get_ask_name()
-        {
-            return (this->_ask_name);
-        }
-
-        int get_ask_password()
-        {
-            return (this->_ask_password);
-        }
+        Message get_class_message();
 
 
-        int get_etats()
-        {
-            return (this->_etats);
-        }
+        bool see_if_new();
+
+        int get_ask_name();
+
+
+        int get_ask_password();
+
+
+        int get_etats();
 
 
 //-----------------------------------------------------------------

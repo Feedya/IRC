@@ -10,38 +10,22 @@ class Message
         std::string _message;
     public:
 
-        Message()
-        {
-            this->_message = "";
-        }
+        Message();
 
-        Message(std::string message)
-        {
-            this->_message = message;
-        }
+        Message(std::string message);
 
   
-        void    add_to_message(std::string message)
-        {
-
-            this->_message = this->_message + message;
-        }
+        void    add_to_message(std::string message);
   
         //-------------------------------------------------
         //setter
-        void    set_message(std::string message)
-        {
-            this->_message = message;
-        }
+        void    set_message(std::string message);
         //-------------------------------------------------
         
 
         //-------------------------------------------------
         //guetteur
-        std::string get_message()
-        {
-            return (this->_message);
-        }
+        std::string get_message();
         //----------------------------------------------------
 
 };

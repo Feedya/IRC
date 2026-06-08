@@ -23,10 +23,31 @@
 
 class Client;
 class OldClient;
+class ClientDataBase;
 
+#include "classes/channel.hpp"
 #include "classes/Message.hpp"
 #include "classes/Client.hpp"
 #include "classes/DataBase.hpp"
+
+//-------------------------------------------
+//classes
+
+//client
+        /*void    add_to_message(std::string entree);
+        int read_message(int fd);
+        void    put_name(std::string name);
+        void    put_password(std::string password);
+        int check_password(std::string password);
+        void    put_nouveau_to_false();
+        void    clean_message();
+        void    put_ask_name_to_one();
+        void    put_ask_password_to_one();
+        void    set_etats(int nombre);
+        std::string get_name();*/
+
+
+//-------------------------------------------
 
 int handle_client_data(int fd, ClientDataBase &db);
 void    boucle_principale(int fd_server);
