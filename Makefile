@@ -6,6 +6,8 @@ C++_FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 LOGIN_DIR = handle_client_data/
 
+HANDLE_DISCUSSION_DIR = handle_client_data/handle_discussion
+
 
 #------------------------------------------------------------------
 #FICHIER SOURCE - FICHIER SOURCE - FICHIER SOURCE - FICHIER SOURCE
@@ -13,11 +15,13 @@ LOGIN_DIR = handle_client_data/
 
 LOGIN_SRC = $(LOGIN_DIR)/handle_client_data.cpp
 
+HANDLE_DISCUSSION_SRC = $(HANDLE_DISCUSSION_DIR)/traitement_etat_discussion.cpp
 
 #------------------------------------------------------------------
 
 INFILES = 	main.cpp boucle_principale.cpp create_listening_socket.cpp utils.cpp\
 			$(LOGIN_SRC)\
+			$(HANDLE_DISCUSSION_SRC)
 #------------------------------------------------------------------
 
 OBJFILES = $(INFILES:.cpp=.o)

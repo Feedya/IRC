@@ -34,6 +34,7 @@ void traitement_etat_nom(int fd, Client *client, ClientDataBase &db, std::string
         {
             client->put_name(msg);
             send_message(fd, "Ce nom est deja pris. relogin (tapez 1) ou creer nouveau (tapez 2) ?\n");
+            client->set_etats(1);
         }
     }
     //si le name est vide tout est bon
@@ -102,12 +103,6 @@ void traitement_etat_ancien_mdp(int fd, Client *client, ClientDataBase &db, std:
     }
 }
 
-//etat 4
-void traitement_etat_discussion(int fd, Client *client, std::string msg)
-{
-    std::string reponse = "[" + client->get_name() + "] déclame : " + msg + "\n";
-    send_message(fd, reponse.c_str());
-}
 
 
 int handle_client_data(int fd, ClientDataBase &db)
@@ -116,7 +111,7 @@ int handle_client_data(int fd, ClientDataBase &db)
     if (client == NULL) 
         return (0);
 
-    char buffer[1000];
+    char buffer[BUFFER_SIZE];
     //on met tout les octets a 0 si jamais
     memset(buffer, 0, sizeof(buffer));
     //on prend se que le client a ecrit
@@ -150,20 +145,20 @@ int handle_client_data(int fd, ClientDataBase &db)
         int etat = client->get_etats();
 
         //on traute le name
-        if (etat == 0)
+        if (etat == ETAT_NOM)
             traitement_etat_nom(fd, client, db, msg);
         //on traite les choix si name est deja pris    
-        else if (etat == 1)
+        else if (etat == ETAT_CHOIX_CONNEXION)
             traitement_etat_choix(fd, client, msg);
         //mot de passe
-        else if (etat == 2)
+        else if (etat == ETAT_MOT_DE_PASSE)
             traitement_etat_nouveau_mdp(fd, client, db, msg);
         //mot de passe pour relogin    
-        else if (etat == 3)
+        else if (etat == ETAT_ANCIEN_MOT_DE_PASSE)
             traitement_etat_ancien_mdp(fd, client, db, msg);
         //message    
-        else if (etat == 4)
-            traitement_etat_discussion(fd, client, msg);
+        else if (etat == ETAT_DISCUSSION)
+            traitement_etat_discussion(fd, client, db, msg);
     }
     
     return 0;

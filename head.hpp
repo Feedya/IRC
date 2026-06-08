@@ -19,6 +19,8 @@
 #include <cstring>
 #include <signal.h>
 
+#define BUFFER_SIZE 1000
+
 class Client;
 class OldClient;
 
@@ -37,4 +39,8 @@ int    create_listening_socket(char *port_char);
 
 int string_finished(std::string str);
 
+
+void traitement_etat_discussion(int fd, Client *client, ClientDataBase &db, std::string msg);
+
+int send_message(int fd, const char *message);
 #endif

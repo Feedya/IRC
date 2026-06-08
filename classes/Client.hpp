@@ -3,6 +3,15 @@
 
 #include "../head.hpp"
 
+enum EtatsClients
+{
+    ETAT_NOM,
+    ETAT_CHOIX_CONNEXION,
+    ETAT_MOT_DE_PASSE,
+    ETAT_ANCIEN_MOT_DE_PASSE,
+    ETAT_DISCUSSION
+};
+
 class Client
 {
     private:
@@ -38,7 +47,7 @@ class Client
         
         //4 discussion
 
-        int _etats;
+        EtatsClients _etats;
 
     public:
 
@@ -50,7 +59,7 @@ class Client
             this->_message.add_to_message("");
             this->_ask_name = 0;
             this->_ask_password = 0;
-            this->_etats = 0;
+            this->_etats = ETAT_NOM;
         }
 
         ~Client()
@@ -132,7 +141,7 @@ class Client
         //avec cette fonction on va mettre les etats differents
         void    set_etats(int nombre)
         {
-            this->_etats = nombre;
+            this->_etats = (EtatsClients)nombre;
         }
 
 //-----------------------------------------------------------------

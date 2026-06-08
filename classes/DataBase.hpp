@@ -23,18 +23,19 @@ class ClientDataBase
         int check_if_name_exist(std::string name)
         {
             if (this->_all_clients.find(name) != this->_all_clients.end())
-                return 1;
-            return 0;
+                return (1);
+            return (0);
         }
 
         // Vérifie si le gentilhomme arpente déjà nos salons
         int is_client_connected(std::string name)
         {
-            for (std::map<int, Client*>::iterator it = _co_clients.begin(); it != _co_clients.end(); ++it) {
+            for (std::map<int, Client*>::iterator it = _co_clients.begin(); it != _co_clients.end(); ++it)
+            {
                 if (it->second->get_name() == name)
-                    return 1;
+                    return (1);
             }
-            return 0;
+            return (0);
         }
 
         //cette fonction va creer un client
@@ -45,7 +46,7 @@ class ClientDataBase
             Client new_client;
             this->_pending_clients[fd] = new_client;
             this->_co_clients[fd] = &this->_pending_clients[fd];
-            return this->_co_clients[fd];
+            return (this->_co_clients[fd]);
         }
 
         void register_new_client(int fd)
@@ -64,23 +65,27 @@ class ClientDataBase
                 this->_co_clients[fd] = &this->_all_clients[name];
                 this->_deco_clients.erase(name);
                 this->_pending_clients.erase(fd);
-                return 0;
+                return (0);
             }
-            return 1;
+            return (1);
         }
 
         int move_co_client_to_deco(int fd)
         {
-            if (this->_co_clients.find(fd) == this->_co_clients.end()) return 1;
+            if (this->_co_clients.find(fd) == this->_co_clients.end())
+                return (1);
             Client *ptr = this->_co_clients[fd];
             this->_co_clients.erase(fd);
             
-            if (check_if_name_exist(ptr->get_name())) {
+            if (check_if_name_exist(ptr->get_name()))
+            {
                 this->_deco_clients[ptr->get_name()] = &this->_all_clients[ptr->get_name()];
-            } else {
+            }
+            else
+            {
                 this->_pending_clients.erase(fd);
             }
-            return 0;
+            return (0);
         }
 
         Client *get_co_client(int fd)
@@ -94,9 +99,21 @@ class ClientDataBase
             if (this->_all_clients.find(name) != this->_all_clients.end())
             {
                 if (this->_all_clients[name].get_password() == password)
-                    return 1;
+                    return (1);
             }
-            return 0;
+            return (0);
+        }
+
+        //cette fonction va trouver le fd du client par name 
+        //que si il est connecter
+        int get_fd_by_name(std::string name)
+        {
+            for (std::map<int, Client*>::iterator it = _co_clients.begin(); it != _co_clients.end(); ++it)
+            {
+                if (it->second->get_name() == name)
+                    return (it->first);
+            }
+            return (-1);
         }
 };
 
