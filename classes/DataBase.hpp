@@ -16,6 +16,8 @@ class ClientDataBase
         //clients qui attendent le name
         std::map<int, Client> _pending_clients;
 
+        
+
     public:
         ClientDataBase();
 

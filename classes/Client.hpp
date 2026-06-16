@@ -16,6 +16,8 @@ class Client
 {
     private:
         std::string _name;
+        std::string _username;
+        std::string _realname;
         std::string _password;
         
         //faut regarder si on peut enlever ca
@@ -46,6 +48,12 @@ class Client
         //3 ancien mdp si relogin
         
         //4 discussion
+
+
+        bool _has_pass;          // A-t-il donné le bon mot de passe ?
+        bool _has_nick;
+        bool _has_user;
+        bool _is_registered;     // Devient vrai quand pass, nick et user sont validés
 
         EtatsClients _etats;
 
